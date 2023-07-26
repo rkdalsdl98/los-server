@@ -13,7 +13,7 @@
 
 # 기술스택  
 
-<img src='https://nestjs.com/img/logo-small.svg' width="50" height="50"> <img src='https://cdn.jumpit.co.kr/images/stacks/typescript.png' width="50" height="50"> <img src='https://cdn.jumpit.co.kr/images/stacks/node.js.png' width="50" height="50"> <img src='https://github.com/rkdalsdl98/los-app/assets/77562358/a7fa2d7e-9d93-44b7-8e67-e4d2188a8c7a' width="50" height="50">
+<img src='https://nestjs.com/img/logo-small.svg' width="50" height="50"> <img src='https://cdn.jumpit.co.kr/images/stacks/typescript.png' width="50" height="50"> <img src='https://cdn.jumpit.co.kr/images/stacks/node.js.png' width="50" height="50"> <img src='https://github.com/rkdalsdl98/los-app/assets/77562358/a7fa2d7e-9d93-44b7-8e67-e4d2188a8c7a' width="50" height="50"> <img src='https://github.com/rkdalsdl98/los-app/assets/77562358/0e30b99c-5521-45dd-8d78-c69b05521836' width="50" height="50">
 
 # Figma  
 
