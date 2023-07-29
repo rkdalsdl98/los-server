@@ -4,7 +4,9 @@ import TeamDto from 'src/team/dto/team.dto';
 import { AuthManager } from 'src/private/auth';
 import { FirebaseManager } from 'src/private/firebase_manger';
 import { FindResult } from 'src/private/types';
-import RegistResDto from './dto/regist_res_dto';
+import RegistResDto from './dto/regist_res.dto';
+import SimpleTeamInfoDto from './dto/simple_team.dto';
+import JoinRequestModel from './model/join_request.model';
 
 @Injectable()
 export class TeamService {
@@ -16,7 +18,7 @@ export class TeamService {
         this.authManager = new AuthManager(this.firebaseManager)
     }
     
-    async registerTeam(data : RegisterTeamDto) : Promise<RegistResDto> {
+    public async registerTeam(data : RegisterTeamDto) : Promise<RegistResDto> {
         try {
             const randTeamCode : string | FindResult = this.authManager.createRandomTeamCode(data.teamName)
             if(randTeamCode === FindResult.DuplicatedTeamName) {
@@ -39,7 +41,20 @@ export class TeamService {
     public async addTeam(team : TeamDto) : Promise<void> {
         if(team !== null && team !== undefined) {
            await this.firebaseManager.addDocuments('team', `${team.teamCode}`, team)
-           .then(_=> this.authManager.addTeam(team.teamName, team.teamCode))
+           .then(simpledata => this.authManager.addTeam(team.teamName, simpledata))
         } else throw "유효하지 않은 팀 정보 입니다."
-    }     
+    }
+    
+    
+    public getTeamList() : SimpleTeamInfoDto[] | null {
+        return this.authManager.getTeams()
+    }
+
+    public async subcribeTeam(teamName : string, joinRequest : JoinRequestModel) {
+        await this.firebaseManager.subcribeTeam(teamName, joinRequest)
+    }
+
+    public async removeSubcribeTeam(teamName : string, joinRequest : JoinRequestModel) {
+        await this.firebaseManager.removeSubcribeTeam(teamName, joinRequest)
+    }
 }
