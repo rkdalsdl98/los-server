@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Body, Param, Delete } from '@nestjs/common'
 import { TeamService } from './team.service';
 import RegistResDto from './dto/regist_res.dto';
 import SimpleTeamInfoDto from './dto/simple_team.dto';
-import JoinRequestModel from './model/join_request.model';
+import { JoinRequestModel } from "src/team/model/join_request.model";
 
 @Controller('team')
 export class TeamController {
@@ -19,7 +19,7 @@ export class TeamController {
     }
 
     @Post('join/:teamcode')
-    async joinTeam(@Body() req : JoinRequestModel, @Param('teamcode') teamcode : string) {
+    async subcribeTeam(@Body() req : JoinRequestModel, @Param('teamcode') teamcode : string) {
         return await this.teamService.subcribeTeam(teamcode, req)
     }
 
@@ -27,4 +27,5 @@ export class TeamController {
     async removeSubcribeTeam(@Body() req : JoinRequestModel, @Param('teamcode') teamcode : string) {
         return await this.teamService.removeSubcribeTeam(teamcode, req)
     }
+
 }

@@ -5,6 +5,7 @@ import JoinRequestModel from "../model/join_request.model";
 import GameDetailModel from "../model/game_detail.model";
 import RegisterTeamDto from "./register_team.dto";
 import RequesterDto from "./requester.dto";
+import RequestBody from "../model/join_request.model";
 
 @ValidatorConstraint()
 class IsMemberArray implements ValidatorConstraintInterface {
@@ -15,7 +16,7 @@ class IsMemberArray implements ValidatorConstraintInterface {
 
 @ValidatorConstraint()
 class IsJoinRequestArray implements ValidatorConstraintInterface {
-    public async validate(requests: JoinRequestModel[], args?: ValidationArguments) : Promise<boolean> {
+    public async validate(requests: RequestBody[], args?: ValidationArguments) : Promise<boolean> {
         return Array.isArray(requests) && requests.reduce((a, b) => a && typeof b.privateId === 'string' && typeof b.nickName === 'string' && typeof b.age === "string" && typeof b.detailInfo === "object" && typeof b.height === "string" && typeof b.profileImageUrl === "string" && typeof b.weight === "string", true)
     }
 }

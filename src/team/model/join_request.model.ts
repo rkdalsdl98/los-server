@@ -1,6 +1,6 @@
 import { IsString } from "class-validator";
 
-export default class JoinRequestModel {
+export default class RequestBody {
     @IsString()
     privateId : string
 
@@ -20,6 +20,13 @@ export default class JoinRequestModel {
     profileImageUrl : string
 
     detailInfo : DetailInfoModel | null
+}
+
+export class JoinRequestModel {
+    @IsString()
+    permission : string
+
+    body : RequestBody
 }
 
 class DetailInfoModel {

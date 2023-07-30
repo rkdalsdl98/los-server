@@ -6,7 +6,7 @@ import { FirebaseManager } from 'src/private/firebase_manger';
 import { FindResult } from 'src/private/types';
 import RegistResDto from './dto/regist_res.dto';
 import SimpleTeamInfoDto from './dto/simple_team.dto';
-import JoinRequestModel from './model/join_request.model';
+import { JoinRequestModel } from "src/team/model/join_request.model";
 
 @Injectable()
 export class TeamService {
@@ -50,11 +50,28 @@ export class TeamService {
         return this.authManager.getTeams()
     }
 
-    public async subcribeTeam(teamName : string, joinRequest : JoinRequestModel) {
-        await this.firebaseManager.subcribeTeam(teamName, joinRequest)
+    public async subcribeTeam(teamCode : string, joinRequest : JoinRequestModel) : Promise<any>{
+        try {
+            const exist = this.authManager.findTeamByCode(teamCode)
+            if(exist) {
+                await this.firebaseManager.subcribeTeam(teamCode, joinRequest)
+                return {message: '성공적으로 가입요청을 전달했습니다', result: true}
+            }
+            return {message: '존재 하지 않는 팀 입니다', result: false}
+        } catch(e) {
+            console.log(e)
+            return {message: '예기치 못한 오류가 발생했습니다', result: false}
+        }
     }
 
-    public async removeSubcribeTeam(teamName : string, joinRequest : JoinRequestModel) {
-        await this.firebaseManager.removeSubcribeTeam(teamName, joinRequest)
+    public async removeSubcribeTeam(teamCode : string, joinRequest : JoinRequestModel) {
+        try{
+            const exist = this.authManager.findTeamByCode(teamCode)
+            if(exist) {
+                await this.firebaseManager.removeSubcribeTeam(teamCode, joinRequest)
+            }
+        } catch(e) { 
+            console.log(e)
+        }
     }
 }
