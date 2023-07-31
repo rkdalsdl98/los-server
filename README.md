@@ -10,3 +10,5 @@ firestore 룰 변경
 
 firestore 룰 접근 권한 개선  
 firebase storage 룰 개선  
+데이터 은닉 추가 해야함  
+팀 생성시 첫번째 시도하면 유효하지 않은 경로 오류발생    
